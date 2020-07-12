@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.codewars.R
+import com.example.codewars.data.model.Overall
 import com.example.codewars.data.model.User
+import com.example.codewars.util.getBetterLanguage
 import kotlinx.android.synthetic.main.item_user_list.view.*
 
 class UserAdapter(private val listOfUser: MutableList<User>?, private val context: Context?) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
@@ -27,16 +29,19 @@ class UserAdapter(private val listOfUser: MutableList<User>?, private val contex
 
         fun bindView(user: User) {
 
-            itemView.txtName.text = user.name ?: user.username
-            itemView.textLanguage.text = user.ranks.languages.keys.toString()
+            itemView.txtName.text = (user.name ?: user.username)
+                .formatToExhibition("name")
+            itemView.textLanguage.text = user.ranks.languages.getBetterLanguage()
+                ?.formatToExhibition("Better Language")
             itemView.txtRank.text = user.boardPosition.toString()
+                .formatToExhibition("Board Position")
             itemView.txtPositionLanguage.text =
-                user.ranks.languages[user.ranks.languages.keys.toString()]?.name.toString()
-
-
+                user.ranks.languages[user.ranks.languages.getBetterLanguage()]?.score.toString()
+                    .formatToExhibition("Score")
         }
-
     }
-
-
 }
+
+private fun String.formatToExhibition(title: String): String? = "$title : $this"
+
+
