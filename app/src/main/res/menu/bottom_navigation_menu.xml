@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/navigation_home"
-        android:title="Authored Challenges" />
-    <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/complete_challenges_item_bottom"
         android:title="Completed Challenges" />
+    <item
+        android:id="@+id/authored_challenges_item_bottom"
+        android:title="Authored Challenges" />
 </menu>

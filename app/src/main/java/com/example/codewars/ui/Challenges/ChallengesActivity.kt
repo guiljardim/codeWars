@@ -8,6 +8,7 @@ import com.example.codewars.R
 import com.example.codewars.util.Constants
 import com.example.codewars.util.Constants.USER_NAME_TAG
 import dagger.android.support.DaggerAppCompatActivity
+import kotlinx.android.synthetic.main.activity_challenges.*
 
 class ChallengesActivity : DaggerAppCompatActivity(), LifecycleOwner, OnFragmentChallengesInteractionListener{
 
@@ -29,7 +30,30 @@ class ChallengesActivity : DaggerAppCompatActivity(), LifecycleOwner, OnFragment
         }
 
         goToChallengesFragment(user)
+
+        initListener()
+
+
     }
+
+    private fun initListener() {
+        bottom_navigation.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.complete_challenges_item_bottom -> {
+                    replaceFragment(ChallengesFragment.newInstance(user))
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.authored_challenges_item_bottom -> {
+                    replaceFragment(AuthoredChallengesFragment.newInstance())
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                else -> return@setOnNavigationItemSelectedListener false
+            }
+        }
+    }
+
 
     override fun goToAuthoredChallengesFragment() {
         replaceFragment(AuthoredChallengesFragment.newInstance())
