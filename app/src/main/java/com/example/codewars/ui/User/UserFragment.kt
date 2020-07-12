@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.codewars.R
 import com.example.codewars.data.model.User
 import dagger.android.support.DaggerFragment
@@ -31,7 +32,14 @@ class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener{
     }
 
     private val userObserver = Observer<User> {user ->
-        Log.d("usuario", user.toString())
+        createUserList(user)
+    }
+
+    private fun createUserList(user: User?) {
+        val listOfUser: MutableList<User>? = mutableListOf()
+        user?.let { listOfUser?.add(it) }
+        recycle_view_user_fragment.layoutManager = LinearLayoutManager(context)
+        recycle_view_user_fragment.adapter = UserAdapter(listOfUser, context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
