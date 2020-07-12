@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.codewars.R
 import com.example.codewars.data.model.User
-import com.example.codewars.ui.OnFragmentInteractionListener
 import com.example.codewars.util.ViewData
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.user_fragment.*
@@ -105,7 +104,7 @@ class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener, UserAdapt
     }
 
     override fun onItemClick(user: String) {
-        listener?.gotToChallengesFragment(user)
+        listener?.gotToChallengesActivity(user, this)
     }
 
 }
