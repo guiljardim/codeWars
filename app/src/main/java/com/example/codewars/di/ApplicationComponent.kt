@@ -14,10 +14,16 @@ import javax.inject.Singleton
 @Component(
     modules = [
         ApiModule::class,
+        ViewModelModule::class,
+        RepositoryModule::class,
+        ActivityModule::class,
+        FragmentModule::class,
+        ServiceModule::class,
         AndroidSupportInjectionModule::class
         ]
 )
 interface ApplicationComponent : AndroidInjector<DaggerApplication> {
+
     @Component.Builder
     interface Builder {
         @BindsInstance
@@ -25,6 +31,4 @@ interface ApplicationComponent : AndroidInjector<DaggerApplication> {
 
         fun build(): ApplicationComponent
     }
-
-    fun inject(appController: BaseApplication)
 }

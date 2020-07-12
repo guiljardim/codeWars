@@ -1,5 +1,6 @@
 package com.example.codewars.di
 
+import com.example.codewars.util.Constants.BASE_URL
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -38,7 +39,7 @@ class ApiModule {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .baseUrl("https://api.themoviedb.org/3/")
+            .baseUrl(BASE_URL)
             .client(okHttpClient)
             .build()
     }
