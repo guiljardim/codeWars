@@ -1,16 +1,13 @@
 package com.example.codewars.ui.User
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.codewars.R
 import com.example.codewars.data.model.User
@@ -27,6 +24,8 @@ class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener{
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
+    private val listOfUser: MutableList<User>? = mutableListOf()
+
     private val userViewModel: UserViewModel by viewModels {
         viewModelFactory
     }
@@ -36,7 +35,6 @@ class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener{
     }
 
     private fun createUserList(user: User?) {
-        val listOfUser: MutableList<User>? = mutableListOf()
         user?.let { listOfUser?.add(it) }
         recycle_view_user_fragment.layoutManager = LinearLayoutManager(context)
         recycle_view_user_fragment.adapter = UserAdapter(listOfUser, context)

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.codewars.R
-import com.example.codewars.data.model.Overall
 import com.example.codewars.data.model.User
 import com.example.codewars.util.getBetterLanguage
 import kotlinx.android.synthetic.main.item_user_list.view.*
