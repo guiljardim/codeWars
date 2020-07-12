@@ -1,6 +1,5 @@
 package com.example.codewars.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -8,8 +7,9 @@ import androidx.lifecycle.LifecycleOwner
 import com.example.codewars.R
 import com.example.codewars.ui.User.UserFragment
 import com.example.codewars.util.Constants.USER_FRAGMENT_TAG
+import dagger.android.support.DaggerAppCompatActivity
 
-class MainActivity : AppCompatActivity(), LifecycleOwner, OnFragmentInteractionListener {
+class MainActivity : DaggerAppCompatActivity(), LifecycleOwner, OnFragmentInteractionListener {
 
     private val fragmentManager by lazy {
         supportFragmentManager
