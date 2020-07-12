@@ -10,3 +10,5 @@ fun Map<String, Overall>.getBetterLanguage(): String? {
     }
     return mapCompare.maxBy { it.value }?.key
 }
+
+fun String.formatToExhibition(title: String): String? = "$title : $this"

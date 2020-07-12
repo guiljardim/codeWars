@@ -1,4 +1,4 @@
-package com.example.codewars.di
+package com.example.codewars.di.module
 
 import com.example.codewars.util.Constants.BASE_URL
 import com.google.gson.Gson

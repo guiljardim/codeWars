@@ -1,11 +1,9 @@
 package com.example.codewars.ui.User
 
 import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.codewars.data.model.User
-import com.example.codewars.data.repository.UserRepository
+import com.example.codewars.data.repository.user.UserRepository
 import com.example.codewars.util.MutableSingleLiveData
 import com.example.codewars.util.ViewData
 import io.reactivex.android.schedulers.AndroidSchedulers

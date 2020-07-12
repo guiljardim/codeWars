@@ -1,7 +1,10 @@
-package com.example.codewars.di
+package com.example.codewars.di.module
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.codewars.di.ViewModelFactory
+import com.example.codewars.di.ViewModelKey
+import com.example.codewars.ui.Challenges.ChallengesViewModel
 import com.example.codewars.ui.User.UserViewModel
 import dagger.Binds
 import dagger.Module
@@ -17,5 +20,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(UserViewModel::class)
     internal abstract fun userViewModel(userViewModel: UserViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChallengesViewModel::class)
+    internal abstract fun challengesViewModel(challengesViewModel: ChallengesViewModel): ViewModel
 
 }
