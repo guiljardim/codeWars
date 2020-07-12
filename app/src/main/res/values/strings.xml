@@ -4,4 +4,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="completed_challenges">Completed Challenges</string>
+    <string name="authored_challenges">Authored Challenges</string>
 </resources>

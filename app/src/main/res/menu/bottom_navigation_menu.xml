@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/complete_challenges_item_bottom"
-        android:title="Completed Challenges" />
+        android:title="@string/completed_challenges" />
     <item
         android:id="@+id/authored_challenges_item_bottom"
-        android:title="Authored Challenges" />
+        android:title="@string/authored_challenges" />
 </menu>
