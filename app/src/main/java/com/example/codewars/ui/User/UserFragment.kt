@@ -1,5 +1,6 @@
 package com.example.codewars.ui.User
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +13,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.codewars.R
 import com.example.codewars.data.model.User
+import com.example.codewars.ui.OnFragmentInteractionListener
 import com.example.codewars.util.ViewData
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.user_fragment.*
 import javax.inject.Inject
 
-class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener{
+class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener, UserAdapter.OnItemClickListener{
 
     companion object {
         fun newInstance() = UserFragment()
@@ -26,10 +28,38 @@ class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener{
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
+    private var listener: OnFragmentInteractionListener? = null
+
     private val listOfUser: MutableList<User>? = mutableListOf()
 
     private val userViewModel: UserViewModel by viewModels {
         viewModelFactory
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnFragmentInteractionListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement OnFragmentInteractionListener")
+        }
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initListener()
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        with(userViewModel){
+            viewLifecycleOwner.lifecycle.addObserver(this)
+            userObserver(this)
+        }
+        return inflater.inflate(R.layout.user_fragment, container, false)
+
     }
 
     private fun userObserver(userViewModel: UserViewModel){
@@ -57,28 +87,9 @@ class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener{
     private fun createUserList(user: User?) {
         user?.let { listOfUser?.add(it) }
         recycle_view_user_fragment.layoutManager = LinearLayoutManager(context)
-        recycle_view_user_fragment.adapter = UserAdapter(listOfUser, context)
+        recycle_view_user_fragment.adapter = UserAdapter(listOfUser, context, this)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initListener()
-    }
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        with(userViewModel){
-            viewLifecycleOwner.lifecycle.addObserver(this)
-            userObserver(this)
-        }
-        return inflater.inflate(R.layout.user_fragment, container, false)
-
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
 
     private fun initListener() {
         search_view_user_fragment.setOnQueryTextListener(this)
@@ -91,6 +102,10 @@ class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener{
 
     override fun onQueryTextChange(p0: String?): Boolean {
         return false
+    }
+
+    override fun onItemClick(user: String) {
+        listener?.gotToChallengesFragment(user)
     }
 
 }
