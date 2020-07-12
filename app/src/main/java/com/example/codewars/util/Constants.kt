@@ -5,8 +5,7 @@ object Constants {
 
 
      const val USER_FRAGMENT_TAG = "userfragment"
-     const val CHALLENGES_FRAGMENT_TAG = "challengesfragment"
-
      const val NAME_USER = "nameuser"
+     const val USER_NAME_TAG = "usernametag"
 
 }
