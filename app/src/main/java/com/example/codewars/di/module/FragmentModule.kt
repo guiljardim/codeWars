@@ -1,5 +1,6 @@
-package com.example.codewars.di
+package com.example.codewars.di.module
 
+import com.example.codewars.ui.Challenges.ChallengesFragment
 import com.example.codewars.ui.User.UserFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -8,5 +9,8 @@ import dagger.android.ContributesAndroidInjector
 abstract class FragmentModule {
     @ContributesAndroidInjector
     abstract fun contributeUserFragment(): UserFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeChallengesFragment(): ChallengesFragment
 
 }

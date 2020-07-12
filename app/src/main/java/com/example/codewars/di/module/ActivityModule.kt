@@ -1,4 +1,4 @@
-package com.example.codewars.di
+package com.example.codewars.di.module
 
 import com.example.codewars.ui.MainActivity
 import dagger.Module
