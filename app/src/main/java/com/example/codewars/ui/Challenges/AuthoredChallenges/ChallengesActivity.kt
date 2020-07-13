@@ -1,16 +1,19 @@
-package com.example.codewars.ui.Challenges
+package com.example.codewars.ui.Challenges.AuthoredChallenges
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LifecycleOwner
 import com.example.codewars.R
+import com.example.codewars.ui.Challenges.completedChallenges.ChallengesFragment
+import com.example.codewars.ui.Challenges.OnFragmentChallengesInteractionListener
 import com.example.codewars.util.Constants
 import com.example.codewars.util.Constants.USER_NAME_TAG
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_challenges.*
 
-class ChallengesActivity : DaggerAppCompatActivity(), LifecycleOwner, OnFragmentChallengesInteractionListener{
+class ChallengesActivity : DaggerAppCompatActivity(), LifecycleOwner,
+    OnFragmentChallengesInteractionListener {
 
     private val fragmentManager by lazy {
         supportFragmentManager
@@ -40,7 +43,11 @@ class ChallengesActivity : DaggerAppCompatActivity(), LifecycleOwner, OnFragment
         bottom_navigation.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.complete_challenges_item_bottom -> {
-                    replaceFragment(ChallengesFragment.newInstance(user))
+                    replaceFragment(
+                        ChallengesFragment.newInstance(
+                            user
+                        )
+                    )
                     return@setOnNavigationItemSelectedListener true
                 }
 
@@ -60,7 +67,11 @@ class ChallengesActivity : DaggerAppCompatActivity(), LifecycleOwner, OnFragment
     }
 
     override fun goToChallengesFragment(user: String?) {
-        replaceFragment(ChallengesFragment.newInstance(user))
+        replaceFragment(
+            ChallengesFragment.newInstance(
+                user
+            )
+        )
     }
 
 

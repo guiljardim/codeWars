@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/NoActionBar">
-        <activity android:name=".ui.Challenges.ChallengesActivity"></activity>
+        <activity android:name=".ui.Challenges.AuthoredChallenges.ChallengesActivity"></activity>
         <activity android:name=".ui.User.UserActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
