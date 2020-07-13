@@ -1,7 +1,6 @@
 package com.example.codewars.ui.Challenges.AuthoredChallenges
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +9,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.codewars.R
-import com.example.codewars.data.model.AuthoredChallenge
-import com.example.codewars.ui.Challenges.completedChallenges.ChallengesViewModel
+import com.example.codewars.data.model.AuthoredChallengeData
 import com.example.codewars.util.Constants.NAME_USER
 import com.example.codewars.util.ViewData
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.authored_challenges_fragment.*
-import kotlinx.android.synthetic.main.challenges_fragment.*
 import javax.inject.Inject
 
 class AuthoredChallengesFragment : DaggerFragment() {
@@ -71,7 +68,7 @@ class AuthoredChallengesFragment : DaggerFragment() {
 
                     ViewData.Status.SUCCESS -> {
                         progress_bar_authored_challenge_fragment.visibility = View.GONE
-                        it.data?.let { data -> createAuthoredList(data) }
+                        it.data?.let { data -> createAuthoredList(data.data) }
                     }
 
                     ViewData.Status.ERROR -> {
@@ -84,7 +81,7 @@ class AuthoredChallengesFragment : DaggerFragment() {
         )
     }
 
-    private fun createAuthoredList(listOfAuthoredChallenges: List<AuthoredChallenge>){
+    private fun createAuthoredList(listOfAuthoredChallenges: List<AuthoredChallengeData>){
         recycle_view_authored_challenge_fragment.layoutManager = LinearLayoutManager(context)
         recycle_view_authored_challenge_fragment.adapter = AuthoredChallengeAdapter(listOfAuthoredChallenges, context)
     }

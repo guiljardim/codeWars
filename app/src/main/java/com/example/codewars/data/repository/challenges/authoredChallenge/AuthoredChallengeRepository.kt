@@ -7,6 +7,6 @@ import javax.inject.Inject
 class AuthoredChallengeRepository @Inject constructor(private val authoredChallengeService: AuthoredChallengeService):
     IAuthoredChallengeRepository {
 
-    override fun getAuthoredChallenge(name: String?): Observable<List<AuthoredChallenge>> =
+    override fun getAuthoredChallenge(name: String?): Observable<AuthoredChallenge> =
         authoredChallengeService.getAuthoredChallenges(name)
 }

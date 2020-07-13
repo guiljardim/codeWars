@@ -3,8 +3,8 @@ package com.example.codewars.ui.Challenges.AuthoredChallenges
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import com.example.codewars.data.model.AuthoredChallenge
+import com.example.codewars.data.model.AuthoredChallengeData
 import com.example.codewars.data.repository.challenges.authoredChallenge.AuthoredChallengeRepository
-import com.example.codewars.data.repository.challenges.completedChallenges.ChallengesRepository
 import com.example.codewars.util.MutableSingleLiveData
 import com.example.codewars.util.ViewData
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,7 +18,7 @@ class AuthoredChallengesViewModel @Inject constructor (
 
     private val disposable = CompositeDisposable()
 
-    val authoredChallengeLiveData : MutableSingleLiveData<ViewData<List<AuthoredChallenge>>> =
+    val authoredChallengeLiveData : MutableSingleLiveData<ViewData<AuthoredChallenge>> =
         MutableSingleLiveData()
 
     fun getAuthoredChallenge(name: String?){
