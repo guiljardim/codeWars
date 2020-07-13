@@ -1,7 +1,9 @@
 package com.example.codewars.di.module
 
-import com.example.codewars.data.repository.challenges.ChallengesRepository
-import com.example.codewars.data.repository.challenges.ChallengesService
+import com.example.codewars.data.repository.challenges.authoredChallenge.AuthoredChallengeRepository
+import com.example.codewars.data.repository.challenges.authoredChallenge.AuthoredChallengeService
+import com.example.codewars.data.repository.challenges.completedChallenges.ChallengesRepository
+import com.example.codewars.data.repository.challenges.completedChallenges.ChallengesService
 import com.example.codewars.data.repository.user.UserRepository
 import com.example.codewars.data.repository.user.UserService
 import dagger.Module
@@ -21,5 +23,17 @@ class RepositoryModule {
     @Singleton
     fun provideChallengesRepository(
         challengesService: ChallengesService
-    ) = ChallengesRepository(challengesService)
+    ) =
+        ChallengesRepository(
+            challengesService
+        )
+
+    @Provides
+    @Singleton
+    fun provideAuthoredChallengesRepository(
+        authoredChallengeService: AuthoredChallengeService
+    ) =
+        AuthoredChallengeRepository(
+            authoredChallengeService
+        )
 }

@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LifecycleOwner
 import com.example.codewars.R
-import com.example.codewars.ui.Challenges.AuthoredChallenges.ChallengesActivity
+import com.example.codewars.ui.Challenges.ChallengesActivity
 import com.example.codewars.util.Constants.USER_FRAGMENT_TAG
 import com.example.codewars.util.Constants.USER_NAME_TAG
 import dagger.android.support.DaggerAppCompatActivity

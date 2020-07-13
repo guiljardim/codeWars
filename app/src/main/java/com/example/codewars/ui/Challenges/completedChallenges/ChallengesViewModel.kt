@@ -3,8 +3,7 @@ package com.example.codewars.ui.Challenges.completedChallenges
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import com.example.codewars.data.model.CompletedChallenge
-import com.example.codewars.data.model.User
-import com.example.codewars.data.repository.challenges.ChallengesRepository
+import com.example.codewars.data.repository.challenges.completedChallenges.ChallengesRepository
 import com.example.codewars.util.MutableSingleLiveData
 import com.example.codewars.util.ViewData
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,7 +12,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class ChallengesViewModel @Inject constructor(
-    val challengesRepository: ChallengesRepository
+    private val challengesRepository: ChallengesRepository
 ) : ViewModel(), LifecycleObserver {
     private val disposable = CompositeDisposable()
 
