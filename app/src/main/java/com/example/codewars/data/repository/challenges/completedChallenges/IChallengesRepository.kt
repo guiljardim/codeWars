@@ -1,4 +1,4 @@
-package com.example.codewars.data.repository.challenges
+package com.example.codewars.data.repository.challenges.completedChallenges
 
 import com.example.codewars.data.model.CompletedChallenge
 import io.reactivex.Observable

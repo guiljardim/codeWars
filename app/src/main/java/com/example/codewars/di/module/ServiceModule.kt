@@ -1,6 +1,7 @@
 package com.example.codewars.di.module
 
-import com.example.codewars.data.repository.challenges.ChallengesService
+import com.example.codewars.data.repository.challenges.authoredChallenge.AuthoredChallengeService
+import com.example.codewars.data.repository.challenges.completedChallenges.ChallengesService
 import com.example.codewars.data.repository.user.UserService
 import dagger.Module
 import dagger.Provides
@@ -20,5 +21,11 @@ class ServiceModule {
     @Singleton
     fun provideChallengesService(retrofit: Retrofit): ChallengesService {
         return retrofit.create(ChallengesService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthoredChallengesService(retrofit: Retrofit): AuthoredChallengeService {
+        return retrofit.create(AuthoredChallengeService::class.java)
     }
 }

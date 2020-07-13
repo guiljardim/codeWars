@@ -1,12 +1,12 @@
-package com.example.codewars.ui.Challenges.AuthoredChallenges
+package com.example.codewars.ui.Challenges
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LifecycleOwner
 import com.example.codewars.R
+import com.example.codewars.ui.Challenges.AuthoredChallenges.AuthoredChallengesFragment
 import com.example.codewars.ui.Challenges.completedChallenges.ChallengesFragment
-import com.example.codewars.ui.Challenges.OnFragmentChallengesInteractionListener
 import com.example.codewars.util.Constants
 import com.example.codewars.util.Constants.USER_NAME_TAG
 import dagger.android.support.DaggerAppCompatActivity
@@ -43,16 +43,12 @@ class ChallengesActivity : DaggerAppCompatActivity(), LifecycleOwner,
         bottom_navigation.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.complete_challenges_item_bottom -> {
-                    replaceFragment(
-                        ChallengesFragment.newInstance(
-                            user
-                        )
-                    )
+                    goToChallengesFragment(user)
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.authored_challenges_item_bottom -> {
-                    replaceFragment(AuthoredChallengesFragment.newInstance())
+                    goToAuthoredChallengesFragment(user)
                     return@setOnNavigationItemSelectedListener true
                 }
 
@@ -62,15 +58,12 @@ class ChallengesActivity : DaggerAppCompatActivity(), LifecycleOwner,
     }
 
 
-    override fun goToAuthoredChallengesFragment() {
-        replaceFragment(AuthoredChallengesFragment.newInstance())
+    override fun goToAuthoredChallengesFragment(user: String?) {
+        replaceFragment(AuthoredChallengesFragment.newInstance(user))
     }
 
     override fun goToChallengesFragment(user: String?) {
-        replaceFragment(
-            ChallengesFragment.newInstance(
-                user
-            )
+        replaceFragment(ChallengesFragment.newInstance(user)
         )
     }
 
