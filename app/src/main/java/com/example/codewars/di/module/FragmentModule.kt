@@ -1,7 +1,7 @@
 package com.example.codewars.di.module
 
-import com.example.codewars.ui.Challenges.AuthoredChallengesFragment
-import com.example.codewars.ui.Challenges.ChallengesFragment
+import com.example.codewars.ui.Challenges.AuthoredChallenges.AuthoredChallengesFragment
+import com.example.codewars.ui.Challenges.completedChallenges.ChallengesFragment
 import com.example.codewars.ui.User.UserFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

@@ -1,6 +1,5 @@
-package com.example.codewars.ui.Challenges
+package com.example.codewars.ui.Challenges.AuthoredChallenges
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,12 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.codewars.R
+import com.example.codewars.ui.Challenges.AuthoredChallengesViewModel
 import javax.inject.Inject
 
 class AuthoredChallengesFragment : Fragment() {
 
     companion object {
-        fun newInstance() = AuthoredChallengesFragment()
+        fun newInstance() =
+            AuthoredChallengesFragment()
     }
 
     @Inject
