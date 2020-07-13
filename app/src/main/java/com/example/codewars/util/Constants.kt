@@ -7,5 +7,6 @@ object Constants {
      const val USER_FRAGMENT_TAG = "userfragment"
      const val NAME_USER = "nameuser"
      const val USER_NAME_TAG = "usernametag"
+     const val ID_USER = "userid"
 
 }

@@ -4,6 +4,8 @@ import com.example.codewars.data.repository.challenges.authoredChallenge.Authore
 import com.example.codewars.data.repository.challenges.authoredChallenge.AuthoredChallengeService
 import com.example.codewars.data.repository.challenges.completedChallenges.ChallengesRepository
 import com.example.codewars.data.repository.challenges.completedChallenges.ChallengesService
+import com.example.codewars.data.repository.challenges.detailsChallenge.DetailsRepository
+import com.example.codewars.data.repository.challenges.detailsChallenge.DetailsService
 import com.example.codewars.data.repository.user.UserRepository
 import com.example.codewars.data.repository.user.UserService
 import dagger.Module
@@ -35,5 +37,14 @@ class RepositoryModule {
     ) =
         AuthoredChallengeRepository(
             authoredChallengeService
+        )
+
+    @Provides
+    @Singleton
+    fun provideDetailsChallengesRepository(
+        detailsService: DetailsService
+    ) =
+        DetailsRepository(
+            detailsService
         )
 }
