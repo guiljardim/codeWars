@@ -34,7 +34,7 @@ class UserAdapter(private val listOfUser: MutableList<User>?, private val contex
                 .formatToExhibition("name")
             itemView.textLanguage.text = user.ranks.languages.getBetterLanguage()
                 ?.formatToExhibition("Better Language")
-            itemView.txtRank.text = user.boardPosition.toString()
+            itemView.txtRank.text = user.leaderboardPosition.toString()
                 .formatToExhibition("Board Position")
             itemView.txtPositionLanguage.text =
                 user.ranks.languages[user.ranks.languages.getBetterLanguage()]?.score.toString()

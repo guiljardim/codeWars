@@ -16,6 +16,7 @@ import com.example.codewars.data.model.User
 import com.example.codewars.util.ViewData
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.user_fragment.*
+import okhttp3.internal.notify
 import javax.inject.Inject
 
 class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener, UserAdapter.OnItemClickListener{
@@ -29,11 +30,11 @@ class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener, UserAdapt
 
     private var listener: OnFragmentInteractionListener? = null
 
-    private val listOfUser: MutableList<User>? = mutableListOf()
-
     private val userViewModel: UserViewModel by viewModels {
         viewModelFactory
     }
+
+    private var listOfUser: List<User>? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -72,6 +73,7 @@ class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener, UserAdapt
 
                     ViewData.Status.SUCCESS -> {
                         progress_bar_user_fragment.visibility = View.GONE
+                        listOfUser = it.data
                         createUserList(it.data)
                     }
 
@@ -83,15 +85,29 @@ class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener, UserAdapt
             })
     }
 
-    private fun createUserList(user: User?) {
-        user?.let { listOfUser?.add(it) }
+    private fun createUserList(user: List<User>?) {
         recycle_view_user_fragment.layoutManager = LinearLayoutManager(context)
-        recycle_view_user_fragment.adapter = UserAdapter(listOfUser, context, this)
+        recycle_view_user_fragment.adapter = UserAdapter(user?.toMutableList(), context, this)
     }
 
 
     private fun initListener() {
         search_view_user_fragment.setOnQueryTextListener(this)
+        button_order_rank_user_fragment.setOnClickListener {
+            orderUserByRank(listOfUser)
+        }
+
+        button_order_search_user_fragment.setOnClickListener {
+            orderUserBySearchTime(listOfUser)
+        }
+    }
+
+    private fun orderUserByRank(list: List<User>?) {
+        createUserList(list?.sortedBy { it.leaderboardPosition }?.toMutableList())
+    }
+
+    private fun orderUserBySearchTime(list: List<User>?) {
+        createUserList(list)
     }
 
     override fun onQueryTextSubmit(name: String?): Boolean {

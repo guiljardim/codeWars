@@ -17,7 +17,9 @@ class UserViewModel @Inject constructor(
 
     private val disposable = CompositeDisposable()
 
-   val userLiveData: MutableSingleLiveData<ViewData<User>> = MutableSingleLiveData()
+   val userLiveData: MutableSingleLiveData<ViewData<List<User>>> = MutableSingleLiveData()
+
+    private val listOfUserToShow: MutableList<User> = mutableListOf()
 
     fun getUser(name: String){
         disposable.add(
@@ -29,7 +31,12 @@ class UserViewModel @Inject constructor(
                 }
                 .subscribe (
                     {
-                        userLiveData.value = ViewData(ViewData.Status.SUCCESS, data = it)
+                        if(listOfUserToShow.contains(it)){
+                            userLiveData.value = ViewData(ViewData.Status.SUCCESS, data = listOfUserToShow)
+                        }else{
+                            listOfUserToShow.add(it)
+                            userLiveData.value = ViewData(ViewData.Status.SUCCESS, data = listOfUserToShow)
+                        }
                     },
                     {
                         userLiveData.value = ViewData(ViewData.Status.ERROR, error = it)
