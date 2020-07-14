@@ -24,7 +24,7 @@ import javax.inject.Inject
 class DetailsChallengesFragment : DaggerFragment() {
 
     companion object {
-        fun newInstance(id: String) =
+        fun newInstance(id: String?) =
             DetailsChallengesFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ID_USER, id)

@@ -1,5 +1,6 @@
 package com.example.codewars.ui.Challenges.AuthoredChallenges
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,13 +11,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.codewars.R
 import com.example.codewars.data.model.AuthoredChallengeData
+import com.example.codewars.ui.Challenges.OnFragmentChallengesInteractionListener
 import com.example.codewars.util.Constants.NAME_USER
 import com.example.codewars.util.ViewData
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.authored_challenges_fragment.*
 import javax.inject.Inject
 
-class AuthoredChallengesFragment : DaggerFragment() {
+class AuthoredChallengesFragment : DaggerFragment(), AuthoredChallengeAdapter.OnItemClickListener {
 
     companion object {
         fun newInstance(user: String?) =
@@ -30,6 +32,8 @@ class AuthoredChallengesFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
+    private var listener: OnFragmentChallengesInteractionListener? = null
+
     private val authoredChallengesViewModel: AuthoredChallengesViewModel by viewModels {
         viewModelFactory
     }
@@ -40,6 +44,15 @@ class AuthoredChallengesFragment : DaggerFragment() {
         super.onCreate(savedInstanceState)
         arguments.let {
             nameUser = it?.getString(NAME_USER)
+        }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnFragmentChallengesInteractionListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement OnFragmentInteractionListener")
         }
     }
 
@@ -83,7 +96,12 @@ class AuthoredChallengesFragment : DaggerFragment() {
 
     private fun createAuthoredList(listOfAuthoredChallenges: List<AuthoredChallengeData>){
         recycle_view_authored_challenge_fragment.layoutManager = LinearLayoutManager(context)
-        recycle_view_authored_challenge_fragment.adapter = AuthoredChallengeAdapter(listOfAuthoredChallenges, context)
+        recycle_view_authored_challenge_fragment.adapter =
+            AuthoredChallengeAdapter(listOfAuthoredChallenges, context, this)
+    }
+
+    override fun onItemClick(idChallenge: String?) {
+        listener?.goToDetailsChallengeFragment(idChallenge)
     }
 
 }

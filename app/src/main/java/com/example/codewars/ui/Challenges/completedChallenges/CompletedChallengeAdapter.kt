@@ -7,9 +7,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.codewars.R
 import com.example.codewars.data.model.CompletedChallengeData
+import com.example.codewars.ui.User.UserAdapter
 import kotlinx.android.synthetic.main.item_completed_challenge_list.view.*
 
-class CompletedChallengeAdapter(private val listOfChallenges: List<CompletedChallengeData>, private val context: Context?) :
+class CompletedChallengeAdapter(
+    private val listOfChallenges: List<CompletedChallengeData>,
+    private val context: Context?,
+    private val listener: OnItemClickListener) :
     RecyclerView.Adapter<CompletedChallengeAdapter.CompletedChallengeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CompletedChallengeViewHolder {
@@ -21,16 +25,23 @@ class CompletedChallengeAdapter(private val listOfChallenges: List<CompletedChal
 
     override fun onBindViewHolder(holder: CompletedChallengeViewHolder, position: Int) {
         listOfChallenges.let {
-            holder.bindView(it[position])
+            holder.bindView(it[position], listener)
         }
     }
 
     class CompletedChallengeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindView(completedChallengeData: CompletedChallengeData) {
+        fun bindView(completedChallengeData: CompletedChallengeData, listener: OnItemClickListener) {
             itemView.text_view_name_completed_challenge.text = completedChallengeData.name
+
+            itemView.setOnClickListener {
+                listener.onItemClick(completedChallengeData.id)
+            }
         }
     }
 
+    interface OnItemClickListener{
+        fun onItemClick(idChallenge: String?)
+    }
 
 }
