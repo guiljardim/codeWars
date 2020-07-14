@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.codewars.R
 import com.example.codewars.data.model.User
 import com.example.codewars.util.ViewData
+import com.example.codewars.util.goneView
+import com.example.codewars.util.visibilityView
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.user_fragment.*
 import okhttp3.internal.notify
@@ -35,7 +37,7 @@ class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener, UserAdapt
         viewModelFactory
     }
 
-    private var listOfUser: List<User>? = null
+    private var listOfUser: MutableList<User>? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -69,32 +71,36 @@ class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener, UserAdapt
             Observer {
                 when (it.status) {
                     ViewData.Status.LOADING ->  {
-                        progress_bar_user_fragment.visibility = View.VISIBLE
-                        text_view_empty_state.visibility = View.GONE
+                        progress_bar_user_fragment.visibilityView()
+                        text_view_empty_state.goneView()
                     }
 
                     ViewData.Status.SUCCESS -> {
-                        progress_bar_user_fragment.visibility = View.GONE
-                        text_view_empty_state.visibility = View.GONE
-                        switch_compat_user_fragment.visibility = View.VISIBLE
-                        text_view_latest_finding.visibility = View.VISIBLE
-                        listOfUser = it.data
-                        createUserList(it.data)
+                        progress_bar_user_fragment.goneView()
+                        text_view_empty_state.goneView()
+                        switch_compat_user_fragment.visibilityView()
+                        text_view_latest_finding.visibilityView()
+
+                        listOfUser = it.data?.toMutableList()
+                        listOfUser?.let { list -> createUserList(list) }
                     }
 
                     ViewData.Status.ERROR -> {
-                        progress_bar_user_fragment.visibility = View.GONE
+                        progress_bar_user_fragment.goneView()
                         Toast.makeText(context,"User not found", Toast.LENGTH_LONG).show()
                     }
                 }
             })
     }
 
-    private fun createUserList(user: List<User>?) {
-        recycle_view_user_fragment.layoutManager = LinearLayoutManager(context)
-        recycle_view_user_fragment.adapter = UserAdapter(user?.toMutableList(), context, this)
-    }
+    private fun createUserList(user: MutableList<User>) {
+        if(user.size > 5){
+            user.remove(user.last())
+        }
 
+        recycle_view_user_fragment.layoutManager = LinearLayoutManager(context)
+        recycle_view_user_fragment.adapter = UserAdapter(user, context, this)
+    }
 
     private fun initListener() {
         search_view_user_fragment.setOnQueryTextListener(this)
@@ -104,21 +110,26 @@ class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener, UserAdapt
             }else{
                 orderUserBySearchTime(listOfUser)
             }
-
         }
     }
 
-    private fun orderUserByRank(list: List<User>?) {
-        createUserList(list?.sortedBy { it.leaderboardPosition }?.toMutableList())
+    private fun orderUserByRank(list: MutableList<User>?) {
+        list?.sortedBy { it.leaderboardPosition }?.toMutableList()?.let { createUserList(it) }
     }
 
-    private fun orderUserBySearchTime(list: List<User>?) {
-        createUserList(list)
+    private fun orderUserBySearchTime(list: MutableList<User>?) {
+        list?.let { createUserList(it) }
     }
 
     override fun onQueryTextSubmit(name: String?): Boolean {
         name?.let { userViewModel.getUser(it)}
+        clearSearchField()
         return true
+    }
+
+    private fun clearSearchField() {
+        search_view_user_fragment.setQuery("", false)
+        search_view_user_fragment.clearFocus()
     }
 
     override fun onQueryTextChange(p0: String?): Boolean {
@@ -128,5 +139,5 @@ class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener, UserAdapt
     override fun onItemClick(user: String) {
         listener?.gotToChallengesActivity(user, this)
     }
-
 }
+

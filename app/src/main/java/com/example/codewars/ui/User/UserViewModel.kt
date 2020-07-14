@@ -34,7 +34,7 @@ class UserViewModel @Inject constructor(
                         if(listOfUserToShow.contains(it)){
                             userLiveData.value = ViewData(ViewData.Status.SUCCESS, data = listOfUserToShow)
                         }else{
-                            listOfUserToShow.add(it)
+                            listOfUserToShow.add(0,it)
                             userLiveData.value = ViewData(ViewData.Status.SUCCESS, data = listOfUserToShow)
                         }
                     },
