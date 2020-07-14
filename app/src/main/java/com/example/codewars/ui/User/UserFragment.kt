@@ -70,10 +70,14 @@ class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener, UserAdapt
                 when (it.status) {
                     ViewData.Status.LOADING ->  {
                         progress_bar_user_fragment.visibility = View.VISIBLE
+                        text_view_empty_state.visibility = View.GONE
                     }
 
                     ViewData.Status.SUCCESS -> {
                         progress_bar_user_fragment.visibility = View.GONE
+                        text_view_empty_state.visibility = View.GONE
+                        switch_compat_user_fragment.visibility = View.VISIBLE
+                        text_view_latest_finding.visibility = View.VISIBLE
                         listOfUser = it.data
                         createUserList(it.data)
                     }
