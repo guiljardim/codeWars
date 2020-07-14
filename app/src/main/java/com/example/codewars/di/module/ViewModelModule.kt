@@ -6,6 +6,7 @@ import com.example.codewars.di.ViewModelFactory
 import com.example.codewars.di.ViewModelKey
 import com.example.codewars.ui.Challenges.AuthoredChallenges.AuthoredChallengesViewModel
 import com.example.codewars.ui.Challenges.completedChallenges.ChallengesViewModel
+import com.example.codewars.ui.Challenges.detailsChallenges.DetailsChallengesViewModel
 import com.example.codewars.ui.User.UserViewModel
 import dagger.Binds
 import dagger.Module
@@ -32,5 +33,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AuthoredChallengesViewModel::class)
     internal abstract fun authoredChallengesViewModel(authoredChallengesViewModel: AuthoredChallengesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DetailsChallengesViewModel::class)
+    internal abstract fun detailsChallengesViewModel(detailsChallengesViewModel: DetailsChallengesViewModel): ViewModel
+
 
 }

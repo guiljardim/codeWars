@@ -12,7 +12,8 @@ import kotlinx.android.synthetic.main.item_authored_challenge_list.view.*
 
 class AuthoredChallengeAdapter(
     private val listOfAuthoredChallenges: List<AuthoredChallengeData>,
-    private val context: Context?) :
+    private val context: Context?,
+    private val listener: OnItemClickListener) :
     RecyclerView.Adapter<AuthoredChallengeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AuthoredChallengeViewHolder {
@@ -24,15 +25,23 @@ class AuthoredChallengeAdapter(
 
     override fun onBindViewHolder(holder: AuthoredChallengeViewHolder, position: Int) {
         listOfAuthoredChallenges.let {
-            holder.bindView(it[position])
+            holder.bindView(it[position], listener)
         }
     }
 
     class AuthoredChallengeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindView(authoredChallenge: AuthoredChallengeData?) {
+        fun bindView(authoredChallenge: AuthoredChallengeData?, listener: OnItemClickListener) {
             itemView.text_view_name_authored_challenge.text = authoredChallenge?.name
+
+            itemView.setOnClickListener {
+                listener.onItemClick(authoredChallenge?.id)
+            }
         }
+    }
+
+    interface OnItemClickListener{
+        fun onItemClick(idChallenge: String?)
     }
 
 

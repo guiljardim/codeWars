@@ -1,12 +1,15 @@
 package com.example.codewars.ui.Challenges
 
+import android.opengl.Visibility
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LifecycleOwner
 import com.example.codewars.R
 import com.example.codewars.ui.Challenges.AuthoredChallenges.AuthoredChallengesFragment
 import com.example.codewars.ui.Challenges.completedChallenges.ChallengesFragment
+import com.example.codewars.ui.Challenges.detailsChallenges.DetailsChallengesFragment
 import com.example.codewars.util.Constants
 import com.example.codewars.util.Constants.USER_NAME_TAG
 import dagger.android.support.DaggerAppCompatActivity
@@ -36,7 +39,11 @@ class ChallengesActivity : DaggerAppCompatActivity(), LifecycleOwner,
 
         initListener()
 
+    }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        bottom_navigation.visibility = View.VISIBLE
     }
 
     private fun initListener() {
@@ -63,8 +70,12 @@ class ChallengesActivity : DaggerAppCompatActivity(), LifecycleOwner,
     }
 
     override fun goToChallengesFragment(user: String?) {
-        replaceFragment(ChallengesFragment.newInstance(user)
-        )
+        replaceFragment(ChallengesFragment.newInstance(user))
+    }
+
+    override fun goToDetailsChallengeFragment(id: String?) {
+        replaceFragment(DetailsChallengesFragment.newInstance(id))
+        bottom_navigation.visibility = View.GONE
     }
 
     private fun replaceFragment(fragment : Fragment) {
