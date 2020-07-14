@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.item_completed_challenge_list.view.*
 class CompletedChallengeAdapter(
     private val listOfChallenges: List<CompletedChallengeData>,
     private val context: Context?,
-    private val listener: OnItemClickListener) :
+    private val listener: OnItemClickListener,
+    private val onBottomListener: OnBottomReachedListener) :
     RecyclerView.Adapter<CompletedChallengeAdapter.CompletedChallengeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CompletedChallengeViewHolder {
@@ -26,6 +27,11 @@ class CompletedChallengeAdapter(
     override fun onBindViewHolder(holder: CompletedChallengeViewHolder, position: Int) {
         listOfChallenges.let {
             holder.bindView(it[position], listener)
+        }
+        if(position == listOfChallenges.size -1 ){
+
+          onBottomListener.onBottomReached()
+
         }
     }
 
@@ -42,6 +48,10 @@ class CompletedChallengeAdapter(
 
     interface OnItemClickListener{
         fun onItemClick(idChallenge: String?)
+    }
+
+    interface OnBottomReachedListener {
+        fun onBottomReached()
     }
 
 }
