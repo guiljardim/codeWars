@@ -29,8 +29,9 @@ class UserAdapter(private val listOfUser: MutableList<User>?, private val contex
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindView(user: User, listener: OnItemClickListener) {
+            val username = if (user.name.isNullOrEmpty())  user.username else user.name
 
-            itemView.txtName.text = (user.name ?: user.username).toUpperCase()
+            itemView.txtName.text = username.toUpperCase()
             itemView.textLanguage.text = user.ranks.languages.getBetterLanguage()?.toUpperCase()
             itemView.txtRank.text = user.leaderboardPosition.toString().formatToExhibition("RANK")
             itemView.txtPositionLanguage.text = user.ranks.languages[user.ranks.languages.getBetterLanguage()]?.score.toString()
