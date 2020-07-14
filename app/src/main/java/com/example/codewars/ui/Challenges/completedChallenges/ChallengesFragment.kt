@@ -2,6 +2,7 @@ package com.example.codewars.ui.Challenges.completedChallenges
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +13,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.codewars.R
+import com.example.codewars.data.model.CompletedChallenge
 import com.example.codewars.data.model.CompletedChallengeData
 import com.example.codewars.ui.Challenges.OnFragmentChallengesInteractionListener
+import com.example.codewars.ui.Challenges.completedChallenges.CompletedChallengeAdapter.OnBottomReachedListener
+import com.example.codewars.ui.Challenges.completedChallenges.CompletedChallengeAdapter.OnItemClickListener
 import com.example.codewars.ui.User.OnFragmentInteractionListener
 import com.example.codewars.ui.User.UserAdapter
 import com.example.codewars.util.Constants.NAME_USER
@@ -24,7 +28,7 @@ import kotlinx.android.synthetic.main.user_fragment.*
 import javax.inject.Inject
 
 
-class ChallengesFragment : DaggerFragment(), CompletedChallengeAdapter.OnItemClickListener {
+class ChallengesFragment : DaggerFragment(), OnItemClickListener, OnBottomReachedListener {
 
     companion object {
         fun newInstance(user: String?) =
@@ -40,6 +44,12 @@ class ChallengesFragment : DaggerFragment(), CompletedChallengeAdapter.OnItemCli
 
     private var listener: OnFragmentChallengesInteractionListener? = null
 
+    private var listOfChallenges: MutableList<CompletedChallengeData> = mutableListOf()
+
+    private var page = 1
+
+    private var totalPages: Int = 0
+
     private val challengesViewModel: ChallengesViewModel by viewModels {
         viewModelFactory
     }
@@ -52,7 +62,6 @@ class ChallengesFragment : DaggerFragment(), CompletedChallengeAdapter.OnItemCli
             nameUser = it?.getString(NAME_USER)
         }
     }
-
 
 
     override fun onAttach(context: Context) {
@@ -71,14 +80,10 @@ class ChallengesFragment : DaggerFragment(), CompletedChallengeAdapter.OnItemCli
         with(challengesViewModel){
             viewLifecycleOwner.lifecycle.addObserver(this)
             completedChallengeObserver(this)
-            this.getCompletedChallenge(nameUser, 1)
+            this.getCompletedChallenge(nameUser, page)
         }
 
         return inflater.inflate(R.layout.challenges_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
     }
 
 
@@ -92,28 +97,36 @@ class ChallengesFragment : DaggerFragment(), CompletedChallengeAdapter.OnItemCli
                     }
 
                     ViewData.Status.SUCCESS -> {
+
                         progress_bar_challenge_fragment.visibility = View.GONE
-                        it.data?.data?.let { data -> createChallengeList(data) }
+                        totalPages = it.data?.totalPages!!
+                        it.data?.data?.let { data -> listOfChallenges.addAll(data) }
+                        createChallengeList()
                     }
 
                     ViewData.Status.ERROR -> {
                         progress_bar_challenge_fragment.visibility = View.GONE
                     }
-
-
                 }
             }
         )
     }
 
-    private fun createChallengeList(listOfChallenges: List<CompletedChallengeData>) {
+    private fun createChallengeList() {
         recycle_view_challenge_fragment.layoutManager = LinearLayoutManager(context)
         recycle_view_challenge_fragment.adapter =
-            CompletedChallengeAdapter(listOfChallenges, context, this)
+            CompletedChallengeAdapter(listOfChallenges, context, this, this)
     }
 
     override fun onItemClick(idChallenge: String?) {
         listener?.goToDetailsChallengeFragment(idChallenge)
     }
+
+    override fun onBottomReached() {
+       if(page <= totalPages) challengesViewModel.getCompletedChallenge(nameUser, page)
+        page++
+    }
+
+
 
 }
