@@ -30,15 +30,10 @@ class UserAdapter(private val listOfUser: MutableList<User>?, private val contex
 
         fun bindView(user: User, listener: OnItemClickListener) {
 
-            itemView.txtName.text = (user.name ?: user.username)
-                .formatToExhibition("name")
-            itemView.textLanguage.text = user.ranks.languages.getBetterLanguage()
-                ?.formatToExhibition("Better Language")
-            itemView.txtRank.text = user.leaderboardPosition.toString()
-                .formatToExhibition("Board Position")
-            itemView.txtPositionLanguage.text =
-                user.ranks.languages[user.ranks.languages.getBetterLanguage()]?.score.toString()
-                    .formatToExhibition("Score")
+            itemView.txtName.text = (user.name ?: user.username).toUpperCase()
+            itemView.textLanguage.text = user.ranks.languages.getBetterLanguage()?.toUpperCase()
+            itemView.txtRank.text = user.leaderboardPosition.toString().formatToExhibition("RANK")
+            itemView.txtPositionLanguage.text = user.ranks.languages[user.ranks.languages.getBetterLanguage()]?.score.toString()
 
             itemView.setOnClickListener{
                 listener.onItemClick(user.username)
