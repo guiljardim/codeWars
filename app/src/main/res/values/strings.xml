@@ -9,4 +9,5 @@
     <string name="order_by_rank">ORDER BY RANK</string>
     <string name="order_by_search">Order By Search</string>
     <string name="latest_findings">LATEST FINDINGS</string>
+    <string name="start_by_searching_your_challenger">START BY SEARCHING \n YOUR CHALLENGER</string>
 </resources>
