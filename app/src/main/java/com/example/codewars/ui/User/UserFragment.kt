@@ -2,6 +2,7 @@ package com.example.codewars.ui.User
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -93,12 +94,13 @@ class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener, UserAdapt
 
     private fun initListener() {
         search_view_user_fragment.setOnQueryTextListener(this)
-        button_order_rank_user_fragment.setOnClickListener {
-            orderUserByRank(listOfUser)
-        }
+        switch_compat_user_fragment.setOnCheckedChangeListener { compoundButton, b ->
+            if(b){
+                orderUserByRank(listOfUser)
+            }else{
+                orderUserBySearchTime(listOfUser)
+            }
 
-        button_order_search_user_fragment.setOnClickListener {
-            orderUserBySearchTime(listOfUser)
         }
     }
 
