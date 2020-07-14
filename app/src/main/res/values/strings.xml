@@ -6,7 +6,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="completed_challenges">Completed Challenges</string>
     <string name="authored_challenges">Authored Challenges</string>
-    <string name="order_by_rank">Order By Rank</string>
+    <string name="order_by_rank">ORDER BY RANK</string>
     <string name="order_by_search">Order By Search</string>
     <string name="latest_findings">LATEST FINDINGS</string>
 </resources>
