@@ -67,7 +67,6 @@ class ChallengesActivity : DaggerAppCompatActivity(), LifecycleOwner,
         )
     }
 
-
     private fun replaceFragment(fragment : Fragment) {
         fragment.let { fragmentToReplace ->
             if (fragmentToReplace.isVisible.not()) {
