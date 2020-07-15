@@ -33,7 +33,7 @@ class UserAdapter(private val listOfUser: MutableList<User>?, private val contex
 
             itemView.txtName.text = username.toUpperCase()
             itemView.textLanguage.text = user.ranks.languages.getBetterLanguage()?.toUpperCase()
-            itemView.txtRank.text = user.leaderboardPosition.toString().formatToExhibition("RANK")
+            itemView.txtRank.text = user.leaderboardPosition.toString().formatToExhibition("#", false)
             itemView.txtPositionLanguage.text = user.ranks.languages[user.ranks.languages.getBetterLanguage()]?.score.toString()
 
             itemView.setOnClickListener{
