@@ -99,6 +99,7 @@ class ChallengesFragment : DaggerFragment(), OnItemClickListener, OnBottomReache
                     ViewData.Status.SUCCESS -> {
 
                         progress_bar_challenge_fragment.visibility = View.GONE
+                        text_view_completed_challenge.visibility = View.VISIBLE
                         totalPages = it.data?.totalPages!!
                         it.data?.data?.let { data -> listOfChallenges.addAll(data) }
                         createChallengeList()
@@ -115,7 +116,7 @@ class ChallengesFragment : DaggerFragment(), OnItemClickListener, OnBottomReache
     private fun createChallengeList() {
         recycle_view_challenge_fragment.layoutManager = LinearLayoutManager(context)
         recycle_view_challenge_fragment.adapter =
-            CompletedChallengeAdapter(listOfChallenges, context, this, this)
+            CompletedChallengeAdapter(listOfChallenges, context, this, this, nameUser)
     }
 
     override fun onItemClick(idChallenge: String?) {
