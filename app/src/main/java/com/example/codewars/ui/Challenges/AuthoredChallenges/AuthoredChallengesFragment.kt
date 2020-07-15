@@ -14,6 +14,7 @@ import com.example.codewars.data.model.AuthoredChallengeData
 import com.example.codewars.ui.Challenges.OnFragmentChallengesInteractionListener
 import com.example.codewars.util.Constants.NAME_USER
 import com.example.codewars.util.ViewData
+import com.example.codewars.util.visibilityView
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.authored_challenges_fragment.*
 import javax.inject.Inject
@@ -81,6 +82,7 @@ class AuthoredChallengesFragment : DaggerFragment(), AuthoredChallengeAdapter.On
 
                     ViewData.Status.SUCCESS -> {
                         progress_bar_authored_challenge_fragment.visibility = View.GONE
+                        text_view_authored_challenge.visibilityView()
                         it.data?.let { data -> createAuthoredList(data.data) }
                     }
 
