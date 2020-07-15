@@ -87,10 +87,10 @@ class DetailsChallengesFragment : DaggerFragment() {
 
     private fun createScreenDetails(data: Challenge?) {
         text_view_name_details_challenge.text = data?.name
-        text_view_category_details_challenge.text = data?.category
+        text_view_date_details_challenge.text = data?.createdAt?.split("T")?.get(0) ?: ""
         text_view_date_details_challenge.text = data?.approvedAt
-        text_view_url_details_challenge.text = data?.url
-        text_view_created_details_challenge.text = data?.createdAt
+        text_view_category_details_challenge.text = data?.category
+        text_view_description_details_challenge.text = data?.description
     }
 
 
