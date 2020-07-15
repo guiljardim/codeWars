@@ -16,6 +16,8 @@ import com.example.codewars.ui.Challenges.completedChallenges.ChallengesViewMode
 import com.example.codewars.util.Constants
 import com.example.codewars.util.Constants.ID_USER
 import com.example.codewars.util.ViewData
+import com.example.codewars.util.goneView
+import com.example.codewars.util.visibilityView
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.challenges_fragment.*
 import kotlinx.android.synthetic.main.details_challenges_fragment.*
@@ -67,28 +69,37 @@ class DetailsChallengesFragment : DaggerFragment() {
             Observer {
                 when(it.status){
                     ViewData.Status.LOADING ->  {
-                        progress_bar_details_challenge_fragment.visibility = View.VISIBLE
+                        progress_bar_details_challenge_fragment.visibilityView()
                     }
 
                     ViewData.Status.SUCCESS -> {
-                        progress_bar_details_challenge_fragment.visibility = View.GONE
+                        progress_bar_details_challenge_fragment.goneView()
+                        startViews()
                         createScreenDetails(it.data)
                     }
 
                     ViewData.Status.ERROR -> {
-                        progress_bar_details_challenge_fragment.visibility = View.GONE
+                        progress_bar_details_challenge_fragment.goneView()
                     }
-
 
                 }
             }
         )
     }
 
+    private fun startViews() {
+        text_view_description_details_challenge_title.visibilityView()
+        text_view_category_details_challenge_title.visibilityView()
+        text_view_date_details_challenge_title.visibilityView()
+        text_view_details_title.visibilityView()
+        view_category_details.visibilityView()
+        view_date_details.visibilityView()
+        view_description_details.visibilityView()
+    }
+
     private fun createScreenDetails(data: Challenge?) {
         text_view_name_details_challenge.text = data?.name
         text_view_date_details_challenge.text = data?.createdAt?.split("T")?.get(0) ?: ""
-        text_view_date_details_challenge.text = data?.approvedAt
         text_view_category_details_challenge.text = data?.category
         text_view_description_details_challenge.text = data?.description
     }
