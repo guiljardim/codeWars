@@ -88,9 +88,9 @@ class AuthoredChallengesFragment : DaggerFragment(), AuthoredChallengeAdapter.On
                     }
 
                     ViewData.Status.ERROR -> {
+                        text_view_authored_challenge_empty_state.visibilityView()
                         progress_bar_authored_challenge_fragment.visibility = View.GONE
                     }
-
 
                 }
             }
@@ -98,6 +98,10 @@ class AuthoredChallengesFragment : DaggerFragment(), AuthoredChallengeAdapter.On
     }
 
     private fun createAuthoredList(listOfAuthoredChallenges: List<AuthoredChallengeData>){
+        if(listOfAuthoredChallenges.isEmpty()){
+            text_view_authored_challenge_empty_state.visibilityView()
+        }
+
         recycle_view_authored_challenge_fragment.layoutManager = LinearLayoutManager(context)
         recycle_view_authored_challenge_fragment.adapter =
             AuthoredChallengeAdapter(listOfAuthoredChallenges, context, this)

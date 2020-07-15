@@ -18,7 +18,6 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="21dp"
             android:fontFamily="@font/d_din_bold"
-            android:textColor="@color/textColorWhite"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textSize="14sp" />
@@ -28,7 +27,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/d_din_bold"
-            android:textColor="@color/textColorGray"
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="@string/authored"
             app:layout_constraintRight_toRightOf="parent"
@@ -42,7 +40,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/d_din_bold"
-            android:textColor="@color/textColorGray"
             app:layout_constraintTop_toBottomOf="@id/text_view_by_authored"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginStart="16dp"

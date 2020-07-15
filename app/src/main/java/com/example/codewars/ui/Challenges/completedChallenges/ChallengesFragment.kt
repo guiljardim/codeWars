@@ -22,6 +22,7 @@ import com.example.codewars.ui.User.OnFragmentInteractionListener
 import com.example.codewars.ui.User.UserAdapter
 import com.example.codewars.util.Constants.NAME_USER
 import com.example.codewars.util.ViewData
+import com.example.codewars.util.visibilityView
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.challenges_fragment.*
 import kotlinx.android.synthetic.main.user_fragment.*
@@ -106,6 +107,7 @@ class ChallengesFragment : DaggerFragment(), OnItemClickListener, OnBottomReache
                     }
 
                     ViewData.Status.ERROR -> {
+                        text_view_completed_challenge_empty_state.visibilityView()
                         progress_bar_challenge_fragment.visibility = View.GONE
                     }
                 }
@@ -114,6 +116,10 @@ class ChallengesFragment : DaggerFragment(), OnItemClickListener, OnBottomReache
     }
 
     private fun createChallengeList() {
+        if(listOfChallenges.isEmpty()){
+            text_view_completed_challenge_empty_state.visibilityView()
+        }
+
         recycle_view_challenge_fragment.layoutManager = LinearLayoutManager(context)
         recycle_view_challenge_fragment.adapter =
             CompletedChallengeAdapter(listOfChallenges, context, this, this, nameUser)
