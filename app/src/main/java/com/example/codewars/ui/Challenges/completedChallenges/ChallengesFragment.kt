@@ -101,7 +101,7 @@ class ChallengesFragment : DaggerFragment(), OnItemClickListener, OnBottomReache
 
                         progress_bar_challenge_fragment.visibility = View.GONE
                         text_view_completed_challenge.visibility = View.VISIBLE
-                        totalPages = it.data?.totalPages!!
+                        totalPages = it.data?.totalPages ?: 0
                         it.data?.data?.let { data -> listOfChallenges.addAll(data) }
                         createChallengeList()
                     }
