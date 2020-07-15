@@ -12,6 +12,7 @@
     <string name="completed_challenges">COMPLETED CHALLENGES</string>
     <string name="authored_challenges">AUTHORED CHALLENGES</string>
     <string name="start_by_searching_your_challenger">START BY SEARCHING \n YOUR CHALLENGER</string>
+    <string name="error_or_not">THIS USER DO NOT HAVE CHALLENGES</string>
     <string name="point">•</string>
     <string name="details">DETAILS</string>
     <string name="date">DATE</string>
