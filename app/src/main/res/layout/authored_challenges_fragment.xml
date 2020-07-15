@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/fragment_authored_challenge"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -26,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="23dp"
         android:layout_marginTop="30dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="@string/authored_challenges"
         android:textSize="16sp"
         android:textColor="@android:color/darker_gray"

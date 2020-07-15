@@ -4,7 +4,7 @@ import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 
 
-class BaseApplication: DaggerApplication(){
+open class BaseApplication: DaggerApplication(){
 
     override fun onCreate() {
         super.onCreate()

@@ -82,6 +82,7 @@ class AuthoredChallengesFragment : DaggerFragment(), AuthoredChallengeAdapter.On
 
                     ViewData.Status.SUCCESS -> {
                         progress_bar_authored_challenge_fragment.visibility = View.GONE
+                        recycle_view_authored_challenge_fragment.visibility = View.VISIBLE
                         text_view_authored_challenge.visibilityView()
                         it.data?.let { data -> createAuthoredList(data.data) }
                     }
