@@ -41,7 +41,7 @@ class CompletedChallengeAdapter(
 
         fun bindView(completedChallengeData: CompletedChallengeData, listener: OnItemClickListener, userName: String?) {
             itemView.text_view_name_completed_challenge.text = completedChallengeData.name
-            itemView.text_view_language.text = completedChallengeData.languages?.first()
+            itemView.text_view_language.text = completedChallengeData.completedLanguages?.first()
             itemView.text_view_date.text = completedChallengeData.completedAt?.split("T")?.get(0) ?: ""
             itemView.text_view_by_username.text = userName?.formatToExhibition("by", true)
 

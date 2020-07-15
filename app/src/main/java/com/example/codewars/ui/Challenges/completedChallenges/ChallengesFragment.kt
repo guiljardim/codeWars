@@ -46,7 +46,7 @@ class ChallengesFragment : DaggerFragment(), OnItemClickListener, OnBottomReache
 
     private var listOfChallenges: MutableList<CompletedChallengeData> = mutableListOf()
 
-    private var page = 1
+    private var page = 0
 
     private var totalPages: Int = 0
 
