@@ -1,4 +1,4 @@
-package com.example.codewars.ui.Challenges.AuthoredChallenges
+package com.example.codewars.ui.Challenges.authoredChallenges
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.codewars.R
 import com.example.codewars.data.model.AuthoredChallengeData
-import com.example.codewars.ui.Challenges.AuthoredChallenges.AuthoredChallengeAdapter.AuthoredChallengeViewHolder
+import com.example.codewars.ui.Challenges.authoredChallenges.AuthoredChallengeAdapter.AuthoredChallengeViewHolder
 import kotlinx.android.synthetic.main.item_authored_challenge_list.view.*
-import kotlinx.android.synthetic.main.item_completed_challenge_list.view.*
 
 class AuthoredChallengeAdapter(
     private val listOfAuthoredChallenges: List<AuthoredChallengeData>,

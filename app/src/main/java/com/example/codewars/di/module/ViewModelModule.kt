@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.codewars.di.ViewModelFactory
 import com.example.codewars.di.ViewModelKey
-import com.example.codewars.ui.Challenges.AuthoredChallenges.AuthoredChallengesViewModel
-import com.example.codewars.ui.Challenges.completedChallenges.ChallengesViewModel
+import com.example.codewars.ui.Challenges.authoredChallenges.AuthoredChallengesViewModel
+import com.example.codewars.ui.Challenges.completedChallenges.CompletedChallengeViewModel
 import com.example.codewars.ui.Challenges.detailsChallenges.DetailsChallengesViewModel
 import com.example.codewars.ui.User.UserViewModel
 import dagger.Binds
@@ -25,8 +25,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(ChallengesViewModel::class)
-    internal abstract fun challengesViewModel(challengesViewModel: ChallengesViewModel): ViewModel
+    @ViewModelKey(CompletedChallengeViewModel::class)
+    internal abstract fun challengesViewModel(completedChallengeViewModel: CompletedChallengeViewModel): ViewModel
 
 
     @Binds

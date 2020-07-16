@@ -11,7 +11,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class ChallengesViewModel @Inject constructor(
+class CompletedChallengeViewModel @Inject constructor(
     private val challengesRepository: ChallengesRepository
 ) : ViewModel(), LifecycleObserver {
     private val disposable = CompositeDisposable()

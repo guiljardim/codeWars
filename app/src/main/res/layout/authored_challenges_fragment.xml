@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:backgroundTint="@color/backgroundColor"
-    tools:context=".ui.Challenges.AuthoredChallenges.AuthoredChallengesFragment">
+    tools:context=".ui.Challenges.authoredChallenges.AuthoredChallengesFragment">
 
     <ProgressBar
         android:id="@+id/progress_bar_authored_challenge_fragment"

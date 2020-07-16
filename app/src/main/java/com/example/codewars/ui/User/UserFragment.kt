@@ -2,7 +2,6 @@ package com.example.codewars.ui.User
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,6 @@ import com.example.codewars.util.goneView
 import com.example.codewars.util.visibilityView
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.user_fragment.*
-import okhttp3.internal.notify
 import javax.inject.Inject
 
 class UserFragment : DaggerFragment(), SearchView.OnQueryTextListener, UserAdapter.OnItemClickListener{

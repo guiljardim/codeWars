@@ -1,7 +1,7 @@
 package com.example.codewars.di.module
 
-import com.example.codewars.ui.Challenges.AuthoredChallenges.AuthoredChallengesFragment
-import com.example.codewars.ui.Challenges.completedChallenges.ChallengesFragment
+import com.example.codewars.ui.Challenges.authoredChallenges.AuthoredChallengesFragment
+import com.example.codewars.ui.Challenges.completedChallenges.CompletedChallengeFragment
 import com.example.codewars.ui.Challenges.detailsChallenges.DetailsChallengesFragment
 import com.example.codewars.ui.User.UserFragment
 import dagger.Module
@@ -13,7 +13,7 @@ abstract class FragmentModule {
     abstract fun contributeUserFragment(): UserFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeChallengesFragment(): ChallengesFragment
+    abstract fun contributeChallengesFragment(): CompletedChallengeFragment
 
     @ContributesAndroidInjector
     abstract fun contributeAuthoredChallengesFragment(): AuthoredChallengesFragment

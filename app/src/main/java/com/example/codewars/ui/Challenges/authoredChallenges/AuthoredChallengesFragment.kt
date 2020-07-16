@@ -1,4 +1,4 @@
-package com.example.codewars.ui.Challenges.AuthoredChallenges
+package com.example.codewars.ui.Challenges.authoredChallenges
 
 import android.content.Context
 import android.os.Bundle

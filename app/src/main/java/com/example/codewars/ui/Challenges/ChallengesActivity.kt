@@ -1,14 +1,13 @@
 package com.example.codewars.ui.Challenges
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LifecycleOwner
 import com.example.codewars.R
-import com.example.codewars.ui.Challenges.AuthoredChallenges.AuthoredChallengesFragment
-import com.example.codewars.ui.Challenges.completedChallenges.ChallengesFragment
+import com.example.codewars.ui.Challenges.authoredChallenges.AuthoredChallengesFragment
+import com.example.codewars.ui.Challenges.completedChallenges.CompletedChallengeFragment
 import com.example.codewars.ui.Challenges.detailsChallenges.DetailsChallengesFragment
 import com.example.codewars.util.Constants
 import com.example.codewars.util.Constants.USER_NAME_TAG
@@ -70,7 +69,7 @@ class ChallengesActivity : DaggerAppCompatActivity(), LifecycleOwner,
     }
 
     override fun goToChallengesFragment(user: String?) {
-        replaceFragment(ChallengesFragment.newInstance(user))
+        replaceFragment(CompletedChallengeFragment.newInstance(user))
     }
 
     override fun goToDetailsChallengeFragment(id: String?) {

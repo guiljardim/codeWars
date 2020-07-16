@@ -2,8 +2,6 @@ package com.example.codewars.ui.Challenges.completedChallenges
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,27 +11,23 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.codewars.R
-import com.example.codewars.data.model.CompletedChallenge
 import com.example.codewars.data.model.CompletedChallengeData
 import com.example.codewars.ui.Challenges.OnFragmentChallengesInteractionListener
 import com.example.codewars.ui.Challenges.completedChallenges.CompletedChallengeAdapter.OnBottomReachedListener
 import com.example.codewars.ui.Challenges.completedChallenges.CompletedChallengeAdapter.OnItemClickListener
-import com.example.codewars.ui.User.OnFragmentInteractionListener
-import com.example.codewars.ui.User.UserAdapter
 import com.example.codewars.util.Constants.NAME_USER
 import com.example.codewars.util.ViewData
 import com.example.codewars.util.visibilityView
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.challenges_fragment.*
-import kotlinx.android.synthetic.main.user_fragment.*
 import javax.inject.Inject
 
 
-class ChallengesFragment : DaggerFragment(), OnItemClickListener, OnBottomReachedListener {
+class CompletedChallengeFragment : DaggerFragment(), OnItemClickListener, OnBottomReachedListener {
 
     companion object {
         fun newInstance(user: String?) =
-            ChallengesFragment().apply {
+            CompletedChallengeFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(NAME_USER, user)
                 }
@@ -55,7 +49,7 @@ class ChallengesFragment : DaggerFragment(), OnItemClickListener, OnBottomReache
 
     private var totalItems: Int = 0
 
-    private val challengesViewModel: ChallengesViewModel by viewModels {
+    private val completedChallengeViewModel: CompletedChallengeViewModel by viewModels {
         viewModelFactory
     }
 
@@ -82,7 +76,7 @@ class ChallengesFragment : DaggerFragment(), OnItemClickListener, OnBottomReache
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        with(challengesViewModel){
+        with(completedChallengeViewModel){
             viewLifecycleOwner.lifecycle.addObserver(this)
             completedChallengeObserver(this)
             completedChallengeLoadMoreObserver(this)
@@ -93,8 +87,8 @@ class ChallengesFragment : DaggerFragment(), OnItemClickListener, OnBottomReache
     }
 
 
-    private fun completedChallengeObserver(challengesViewModel: ChallengesViewModel){
-        challengesViewModel.completedChallengeLiveData.observe(
+    private fun completedChallengeObserver(completedChallengeViewModel: CompletedChallengeViewModel){
+        completedChallengeViewModel.completedChallengeLiveData.observe(
             viewLifecycleOwner,
             Observer {
                 when(it.status){
@@ -120,8 +114,8 @@ class ChallengesFragment : DaggerFragment(), OnItemClickListener, OnBottomReache
         )
     }
 
-    private fun completedChallengeLoadMoreObserver(challengesViewModel: ChallengesViewModel){
-        challengesViewModel.completedChallengePaginationLiveData.observe(
+    private fun completedChallengeLoadMoreObserver(completedChallengeViewModel: CompletedChallengeViewModel){
+        completedChallengeViewModel.completedChallengePaginationLiveData.observe(
             viewLifecycleOwner,
             Observer {
                 when(it.status){
@@ -162,7 +156,7 @@ class ChallengesFragment : DaggerFragment(), OnItemClickListener, OnBottomReache
     override fun onBottomReached() {
         if(listOfChallenges.size != totalItems){
 
-            if(page <= totalPages) challengesViewModel.getCompleteChallengePagination(nameUser, page)
+            if(page <= totalPages) completedChallengeViewModel.getCompleteChallengePagination(nameUser, page)
 
             page++
         } else {

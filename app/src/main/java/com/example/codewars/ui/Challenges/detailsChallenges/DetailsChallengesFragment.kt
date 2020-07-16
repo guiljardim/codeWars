@@ -1,25 +1,19 @@
 package com.example.codewars.ui.Challenges.detailsChallenges
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.codewars.R
 import com.example.codewars.data.model.Challenge
-import com.example.codewars.ui.Challenges.completedChallenges.ChallengesViewModel
-import com.example.codewars.util.Constants
 import com.example.codewars.util.Constants.ID_USER
 import com.example.codewars.util.ViewData
 import com.example.codewars.util.goneView
 import com.example.codewars.util.visibilityView
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.challenges_fragment.*
 import kotlinx.android.synthetic.main.details_challenges_fragment.*
 import javax.inject.Inject
 

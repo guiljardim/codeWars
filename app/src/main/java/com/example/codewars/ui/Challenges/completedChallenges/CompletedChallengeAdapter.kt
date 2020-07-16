@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.codewars.R
 import com.example.codewars.data.model.CompletedChallengeData
-import com.example.codewars.ui.User.UserAdapter
 import com.example.codewars.util.formatToExhibition
 import kotlinx.android.synthetic.main.item_completed_challenge_list.view.*
 

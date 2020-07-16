@@ -1,9 +1,8 @@
-package com.example.codewars.ui.Challenges.AuthoredChallenges
+package com.example.codewars.ui.Challenges.authoredChallenges
 
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import com.example.codewars.data.model.AuthoredChallenge
-import com.example.codewars.data.model.AuthoredChallengeData
 import com.example.codewars.data.repository.challenges.authoredChallenge.AuthoredChallengeRepository
 import com.example.codewars.util.MutableSingleLiveData
 import com.example.codewars.util.ViewData
