@@ -35,7 +35,6 @@ class ChallengesActivity : DaggerAppCompatActivity(), LifecycleOwner,
         }
 
         goToChallengesFragment(user)
-
         initListener()
 
     }
