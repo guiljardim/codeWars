@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">codeWars</string>
+    <string name="title_activity_challenges">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="completed">COMPLETED</string>
+    <string name="authored">AUTHORED</string>
+    <string name="order_by_rank">ORDER BY RANK</string>
+    <string name="order_by_search">Order By Search</string>
+    <string name="latest_findings">LATEST FINDINGS</string>
+    <string name="completed_challenges">COMPLETED CHALLENGES</string>
+    <string name="authored_challenges">AUTHORED CHALLENGES</string>
+    <string name="start_by_searching_your_challenger">START BY SEARCHING \n YOUR CHALLENGER</string>
+    <string name="error_or_not">THIS USER DO NOT HAVE CHALLENGES</string>
+    <string name="point">•</string>
+    <string name="details">DETAILS</string>
+    <string name="date">DATE</string>
+    <string name="category">CATEGORY</string>
+    <string name="description">DESCRIPTION</string>
 </resources>
