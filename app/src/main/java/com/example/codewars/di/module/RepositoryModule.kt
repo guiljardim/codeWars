@@ -25,26 +25,17 @@ class RepositoryModule {
     @Singleton
     fun provideChallengesRepository(
         challengesService: ChallengesService
-    ) =
-        ChallengesRepository(
-            challengesService
-        )
+    ) = ChallengesRepository(challengesService)
 
     @Provides
     @Singleton
     fun provideAuthoredChallengesRepository(
         authoredChallengeService: AuthoredChallengeService
-    ) =
-        AuthoredChallengeRepository(
-            authoredChallengeService
-        )
+    ) = AuthoredChallengeRepository(authoredChallengeService)
 
     @Provides
     @Singleton
     fun provideDetailsChallengesRepository(
         detailsService: DetailsService
-    ) =
-        DetailsRepository(
-            detailsService
-        )
+    ) = DetailsRepository(detailsService)
 }
