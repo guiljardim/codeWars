@@ -47,9 +47,13 @@ class ChallengesFragment : DaggerFragment(), OnItemClickListener, OnBottomReache
 
     private var listOfChallenges: MutableList<CompletedChallengeData> = mutableListOf()
 
-    private var page = 0
+    private lateinit var completedChallengeAdapter: CompletedChallengeAdapter
+
+    private var page = 1
 
     private var totalPages: Int = 0
+
+    private var totalItems: Int = 0
 
     private val challengesViewModel: ChallengesViewModel by viewModels {
         viewModelFactory
@@ -81,7 +85,8 @@ class ChallengesFragment : DaggerFragment(), OnItemClickListener, OnBottomReache
         with(challengesViewModel){
             viewLifecycleOwner.lifecycle.addObserver(this)
             completedChallengeObserver(this)
-            this.getCompletedChallenge(nameUser, page)
+            completedChallengeLoadMoreObserver(this)
+            this.getCompletedChallenge(nameUser, 0)
         }
 
         return inflater.inflate(R.layout.challenges_fragment, container, false)
@@ -98,12 +103,37 @@ class ChallengesFragment : DaggerFragment(), OnItemClickListener, OnBottomReache
                     }
 
                     ViewData.Status.SUCCESS -> {
-
                         progress_bar_challenge_fragment.visibility = View.GONE
                         text_view_completed_challenge.visibility = View.VISIBLE
                         totalPages = it.data?.totalPages ?: 0
+                        totalItems = it.data?.totalItems?.toInt() ?: 0
                         it.data?.data?.let { data -> listOfChallenges.addAll(data) }
                         createChallengeList()
+                    }
+
+                    ViewData.Status.ERROR -> {
+                        text_view_completed_challenge_empty_state.visibilityView()
+                        progress_bar_challenge_fragment.visibility = View.GONE
+                    }
+                }
+            }
+        )
+    }
+
+    private fun completedChallengeLoadMoreObserver(challengesViewModel: ChallengesViewModel){
+        challengesViewModel.completedChallengePaginationLiveData.observe(
+            viewLifecycleOwner,
+            Observer {
+                when(it.status){
+                    ViewData.Status.LOADING ->  {
+                        progress_bar_challenge_fragment.visibility = View.VISIBLE
+                    }
+
+                    ViewData.Status.SUCCESS -> {
+                        progress_bar_challenge_fragment.visibility = View.GONE
+                        text_view_completed_challenge.visibility = View.VISIBLE
+                        it.data?.data?.let { data -> listOfChallenges.addAll(data) }
+                        completedChallengeAdapter.notifyDataSetChanged()
                     }
 
                     ViewData.Status.ERROR -> {
@@ -119,10 +149,10 @@ class ChallengesFragment : DaggerFragment(), OnItemClickListener, OnBottomReache
         if(listOfChallenges.isEmpty()){
             text_view_completed_challenge_empty_state.visibilityView()
         }
+        completedChallengeAdapter = CompletedChallengeAdapter(listOfChallenges, context, this, this, nameUser)
 
         recycle_view_challenge_fragment.layoutManager = LinearLayoutManager(context)
-        recycle_view_challenge_fragment.adapter =
-            CompletedChallengeAdapter(listOfChallenges, context, this, this, nameUser)
+        recycle_view_challenge_fragment.adapter = completedChallengeAdapter
     }
 
     override fun onItemClick(idChallenge: String?) {
@@ -130,8 +160,15 @@ class ChallengesFragment : DaggerFragment(), OnItemClickListener, OnBottomReache
     }
 
     override fun onBottomReached() {
-       if(page <= totalPages) challengesViewModel.getCompletedChallenge(nameUser, page)
-        page++
+        if(listOfChallenges.size != totalItems){
+
+            if(page <= totalPages) challengesViewModel.getCompleteChallengePagination(nameUser, page)
+
+            page++
+        } else {
+            Toast.makeText(context,"you have reached the end of the list", Toast.LENGTH_LONG).show()
+        }
+
     }
 
 

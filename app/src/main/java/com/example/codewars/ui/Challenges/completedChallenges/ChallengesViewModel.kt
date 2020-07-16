@@ -19,6 +19,9 @@ class ChallengesViewModel @Inject constructor(
     val completedChallengeLiveData: MutableSingleLiveData<ViewData<CompletedChallenge>> =
         MutableSingleLiveData()
 
+    val completedChallengePaginationLiveData: MutableSingleLiveData<ViewData<CompletedChallenge>> =
+        MutableSingleLiveData()
+
     fun getCompletedChallenge(name: String?, page: Int){
         disposable.add(
             challengesRepository
@@ -34,6 +37,25 @@ class ChallengesViewModel @Inject constructor(
                     },
                     {
                         completedChallengeLiveData.value = ViewData(ViewData.Status.ERROR, error = it)
+                    })
+        )
+    }
+
+    fun getCompleteChallengePagination(name: String?, page: Int){
+        disposable.add(
+            challengesRepository
+                .getCompletedChallenge(name, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe {
+                    completedChallengePaginationLiveData.postValue(ViewData(ViewData.Status.LOADING))
+                }
+                .subscribe (
+                    {
+                        completedChallengePaginationLiveData.value = ViewData(ViewData.Status.SUCCESS, data = it)
+                    },
+                    {
+                        completedChallengePaginationLiveData.value = ViewData(ViewData.Status.ERROR, error = it)
                     })
         )
     }
