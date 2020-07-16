@@ -10,6 +10,9 @@ import com.example.codewars.ui.Challenges.authoredChallenges.AuthoredChallengesF
 import com.example.codewars.ui.Challenges.completedChallenges.CompletedChallengeFragment
 import com.example.codewars.ui.Challenges.detailsChallenges.DetailsChallengesFragment
 import com.example.codewars.util.Constants
+import com.example.codewars.util.Constants.CHALLENGE_AUTHORED_TAG
+import com.example.codewars.util.Constants.CHALLENGE_COMPLETED_TAG
+import com.example.codewars.util.Constants.CHALLENGE_DETAILS_TAG
 import com.example.codewars.util.Constants.USER_NAME_TAG
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_challenges.*
@@ -35,7 +38,6 @@ class ChallengesActivity : DaggerAppCompatActivity(), LifecycleOwner,
         }
 
         goToChallengesFragment(user)
-
         initListener()
 
     }
@@ -43,6 +45,8 @@ class ChallengesActivity : DaggerAppCompatActivity(), LifecycleOwner,
     override fun onBackPressed() {
         super.onBackPressed()
         bottom_navigation.visibility = View.VISIBLE
+        finish()
+
     }
 
     private fun initListener() {
@@ -65,24 +69,24 @@ class ChallengesActivity : DaggerAppCompatActivity(), LifecycleOwner,
 
 
     override fun goToAuthoredChallengesFragment(user: String?) {
-        replaceFragment(AuthoredChallengesFragment.newInstance(user))
+        replaceFragment(AuthoredChallengesFragment.newInstance(user), CHALLENGE_AUTHORED_TAG)
     }
 
     override fun goToChallengesFragment(user: String?) {
-        replaceFragment(CompletedChallengeFragment.newInstance(user))
+        replaceFragment(CompletedChallengeFragment.newInstance(user), CHALLENGE_COMPLETED_TAG)
     }
 
     override fun goToDetailsChallengeFragment(id: String?) {
-        replaceFragment(DetailsChallengesFragment.newInstance(id))
+        replaceFragment(DetailsChallengesFragment.newInstance(id), CHALLENGE_DETAILS_TAG)
         bottom_navigation.visibility = View.GONE
     }
 
-    private fun replaceFragment(fragment : Fragment) {
+    private fun replaceFragment(fragment : Fragment, tag: String) {
         fragment.let { fragmentToReplace ->
             if (fragmentToReplace.isVisible.not()) {
                 fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.content_fragment_challenge, fragmentToReplace,
-                    Constants.USER_FRAGMENT_TAG
+                    tag
                 )
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.commit()

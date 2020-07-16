@@ -9,4 +9,9 @@ object Constants {
      const val USER_NAME_TAG = "usernametag"
      const val ID_USER = "userid"
 
+     const val CHALLENGE_COMPLETED_TAG = "challengecompletedtag"
+     const val CHALLENGE_AUTHORED_TAG = "challengeauthoredtag"
+     const val CHALLENGE_DETAILS_TAG = "challengedetailstag"
+
+
 }
